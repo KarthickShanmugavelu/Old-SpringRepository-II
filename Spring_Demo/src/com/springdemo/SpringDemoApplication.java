@@ -14,8 +14,14 @@ public class SpringDemoApplication {
 		System.out.println("Testing Constructor injection: "+theCoach.getDailyFortune());
 		System.out.println(theCoach2.getDailyWorkout());
 		
-		Coach cricketCoach = context.getBean("myCricketCoach",Coach.class);
+		CricketCoach cricketCoach = context.getBean("myCricketCoach",CricketCoach.class);
 		System.out.println("Setter Injection Example: "+cricketCoach.getDailyFortune());
+		System.out.println("Values Injecton from application context ex: "+cricketCoach.getEmailAddress()+" : "+cricketCoach.getTeam());
+		System.out.println("Values Injecton from application context and Properties file ex: "+cricketCoach.getManager()+" : "+cricketCoach.getPro());
+		
+		System.out.println("=======Random Fortune============");
+		RandomCoach randomCoach=context.getBean("randomCoach",RandomCoach.class);
+		System.out.println(randomCoach.getDailyFortune());
 		//close cont
 		context.close();
 	}

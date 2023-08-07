@@ -6,16 +6,38 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <!-- Load Props file-->
+    <context:property-placeholder location="classpath:sport.properties"/>
+    
 
     <!-- Define your beans here -->
     
     <bean id="fortuneService" class="com.springdemo.HappyFortuneService"></bean>
     
-    <bean id="myCoach" class="com.springdemo.BaseballCoach"><constructor-arg ref="fortuneService"></constructor-arg></bean>
+    <bean id="randomFortuneService" class="com.springdemo.RandonFortuneService"/>
+    
+    <bean id="myCoach" class="com.springdemo.BaseballCoach">
+    <!-- constructor injection -->
+    <constructor-arg ref="fortuneService"></constructor-arg></bean>
     
  	<bean id="customCoach" class="com.springdemo.WeightLiftingCoach" ></bean>
  	
- 	<bean id="myCricketCoach" class="com.springdemo.CricketCoach"><property name="fortuneService" ref="fortuneService"/></bean>
+ 	<bean id="myCricketCoach" class="com.springdemo.CricketCoach">
+ 	 <!-- setter injection -->
+ 	<property name="fortuneService" ref="fortuneService"/>
+ 	
+ 	<!-- Values injection -->
+ 	<property name="emailAddress" value="csk@gmail.com"/>
+ 	<property name="team" value="Chennai Super Kings"/>
+ 	<property name="manager" value="${manager}"/>
+ 	<property name="pro" value="${pro}"/>
+ 	
+ 	</bean>
+ 	
+ 	<bean id="randomCoach" class="com.springdemo.RandomCoach">
+ 	<property name="fortuneService" ref="randomFortuneService"/></bean>
+ 	
  	
     
 </beans>
